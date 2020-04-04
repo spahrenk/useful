@@ -138,28 +138,30 @@ void test2();
 void test2()
 {
 	std::size_t m=4;
-	std::size_t n=32;
-	
-	darr2 d(m,n);
+	std::size_t n=12;
+	darr2 D(m,n);
 	std::size_t i,j;
 	for(i=0;i<m;++i)
 		for(j=0;j<n;++j)
-			d(i,j)=2*rndom()-1;
+			D(i,j)=2*rndom()-1;
 
-	darr2 u,s,v;
-	bool res=d.SVD(u,s,v);
-
+	std::cout<<"D:\n"<<D<<"\n";
+	darr2 U,S,V;
+	bool res=D.SVD(U,S,V);
+	darr2 Dp=U*S*V.transpose();
+	std::cout<<"D':\n"<<Dp<<"\n";
+	
 	//darr2 di=d.pseudoinverse(1e8);
 	//darr2 p=d*di;
-	std::cout<<s<<"\n";
+	//std::cout<<"S:\n"<<S<<"\n";
 }
 
 
 void test3();
 void test3()
 {
-	long nPoints=9;
-	long nPow=5;
+	long nPoints=11;
+	long nPow=2;
 	double r0=1,rRange=0.4;
 
 	//double cPhi=cos(Pi*phi/180),sPhi=sin(Pi*phi/180);
@@ -233,8 +235,8 @@ void test3()
 	std::cout<<"matrix:"<<mComp<<"\n";
 
 	darr2 diffShiftP=mComp*d;
-	std::cout<<"diffShift:"<<diffShift<<"\n";
-	std::cout<<"diffShift':"<<diffShiftP<<"\n";
+	std::cout<<"diffShift:\n"<<diffShift<<"\n";
+	std::cout<<"diffShift':\n"<<diffShiftP<<"\n";
 }
 
 void test4();
@@ -252,6 +254,6 @@ int main(int argc, const char * argv[]) {
 	@autoreleasepool {
 	    // Setup code that might create autoreleased objects goes here.
 	}
-	test3();
+	test2();
 	return NSApplicationMain(argc, argv);
 }
